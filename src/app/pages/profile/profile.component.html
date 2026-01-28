@@ -1,0 +1,110 @@
+<div class="profile-page" *ngIf="userProfile">
+  <div class="profile-container">
+    <!-- Left side: Profile form -->
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>Profile Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #profileForm="ngForm" (ngSubmit)="updateProfile()">
+        <mat-form-field style="width: 100%">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="userProfile.first_name" name="full_name" />
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="userProfile.last_name" name="last_name" />
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Country</mat-label>
+          <input matInput [(ngModel)]="userProfile.country" name="country" />
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>City</mat-label>
+          <input matInput [(ngModel)]="userProfile.city" name="city" />
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Age</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="userProfile.age"
+            name="age"
+          />
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Gender</mat-label>
+          <mat-select [(ngModel)]="userProfile.gender" name="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+            <mat-option value="other">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Save Profile
+        </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Right side: User ratings -->
+    <mat-card class="ratings-card">
+      <mat-card-header>
+        <mat-card-title>My Recipe Ratings</mat-card-title>
+        <mat-card-subtitle *ngIf="userRatings.length > 0">
+          You have rated {{ userRatings.length }} recipe{{ userRatings.length !== 1 ? 's' : '' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="loadingRatings" class="loading-container">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading your ratings...</p>
+        </div>
+
+        <div *ngIf="!loadingRatings && userRatings.length === 0" class="no-ratings">
+          <mat-icon>star_border</mat-icon>
+          <p>You haven't rated any recipes yet.</p>
+          <p class="subtitle">Start rating recipes to see them here!</p>
+        </div>
+
+        <div *ngIf="!loadingRatings && userRatings.length > 0" class="ratings-list">
+          <mat-card *ngFor="let rating of userRatings" class="rating-item">
+            <mat-card-content>
+              <div class="rating-header">
+                <img
+                  *ngIf="rating.recipes.image_url"
+                  [src]="rating.recipes.image_url"
+                  [alt]="rating.recipes.name"
+                  class="recipe-image"
+                />
+                <div class="recipe-info">
+                  <h4>{{ rating.recipes.name }}</h4>
+                  <span class="category-badge">{{ rating.recipes.category }}</span>
+                </div>
+              </div>
+
+              <div class="rating-details">
+                <div class="stars">{{ getRatingStars(rating.rating) }}</div>
+                <span class="rating-number">{{ rating.rating }}/5</span>
+              </div>
+
+              <p *ngIf="rating.description" class="rating-description">
+                "{{ rating.description }}"
+              </p>
+
+              <div class="rating-date">
+                Rated on {{ formatDate(rating.created_at) }}
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<!-- recommended-recipe.component.html -->
+<ng-container
+  *ngIf="!loading && !error && recipes!.length > 0; else spinnerOrError"
+>
+  <div class="header‐with‐info">
+    <h1 class="header‐text">{{ headerText }}</h1>
+
+    <button
+      mat-icon-button
+      class="info‐btn"
+      matTooltip="Recommendations are based on your location, age, and gender."
+      matTooltipPosition="right"
+      aria-label="How recommendations are built"
+    >
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let r of recipes; let i = index">
+      <mat-card class="recipe-card" [routerLink]="['/recipes', r.id]">
+        <span class="card-number">{{ i + 1 }}</span>
+        <img mat-card-image [src]="r.image_url" [alt]="r.name" />
+        <mat-card-header>
+          <mat-card-title>{{ r.name }}</mat-card-title>
+          <div class="rating">
+            <mat-icon aria-hidden="false" aria-label="star">star</mat-icon>
+            {{ r.avgRating | number : "1.1-1" }}
+            <span class="count">({{ r.ratingCount }})</span>
+          </div>
+        </mat-card-header>
+      </mat-card>
+    </ng-template>
+  </owl-carousel-o>
+</ng-container>
+
+<ng-template #spinnerOrError>
+  <mat-progress-spinner
+    *ngIf="loading"
+    mode="indeterminate"
+    diameter="50"
+  ></mat-progress-spinner>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="!loading && !error && !recipes.length" class="no-data">
+    No recommendations to display.
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<!-- correlation.component.html -->
+<mat-card *ngIf="!loading && !error; else spinner">
+  <mat-card-title>Recipe Metrics Correlation</mat-card-title>
+  <ngx-charts-heat-map
+    [view]="view"
+    [results]="heatmapData"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [showXAxisLabel]="showXAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-heat-map>
+</mat-card>
+
+<ng-template #spinner>
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</ng-template>
+
+<div *ngIf="error" class="error">{{ error }}</div>

@@ -1,0 +1,59 @@
+/* src/app/pages/add-recipe/add-recipe.component.scss */
+
+:host {
+  /* push content below the fixed toolbar (64px height) */
+  display: block;
+  padding: 94px 0;
+}
+
+.add-recipe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1rem;
+  align-items: center;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  mat-card {
+    padding: 24px;
+    max-width: 800px;
+  }
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .row-fields {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+
+    mat-form-field {
+      flex: 1 1 200px;
+    }
+  }
+
+  .rating-input {
+    margin-bottom: 24px;
+  }
+
+  button {
+    margin-top: 24px;
+  }
+
+  .error {
+    color: #b00020;
+    margin-top: 12px;
+  }
+}
+
+.centered-spinner {
+  display: block;
+  margin: 50px auto;
+}

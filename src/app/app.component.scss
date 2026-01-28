@@ -1,0 +1,60 @@
+.app-toolbar {
+  position: fixed;        /* sit on top of all pages */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;           /* match your toolbar height */
+  background: rgba(0, 0, 0, 0.2); /* semi-transparent */
+  backdrop-filter: blur(8px);     /* optional glass effect */
+  z-index: 1000;          /* above everything else */
+  box-shadow: none;
+
+  backdrop-filter: blur(5px);
+  color: #fff;
+
+  .mat-toolbar-row,
+  & {
+    min-height: 64px;
+    padding: 10px 4rem;
+  }
+
+  .logo.nav-link {
+    cursor: pointer;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  button {
+    color: #fff;
+    margin-left: 8px;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.app-footer {
+  position: fixed;        /* sit on top of all pages */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.2);     /* semi-transparent black */
+  backdrop-filter: blur(8px);         /* same glass blur effect */
+  z-index: 1000;                      /* sit above all other content */
+  box-shadow: none;
+  color: #fff;
+
+  .mat-toolbar-row,
+  & {
+    min-height: 64px;
+    padding: 10px 4rem;               /* match toolbar padding */
+  }
+}
+
+::ng-deep .cdk-overlay-container *{
+  font-size: 18px !important;
+  // backdrop-filter: blur(5px) !important;    /* glass effect */
+}

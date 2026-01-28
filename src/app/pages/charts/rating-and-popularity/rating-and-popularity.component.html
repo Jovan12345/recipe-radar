@@ -1,0 +1,43 @@
+<!-- recommended-recipe.component.html -->
+<ng-container *ngIf="!loading && !error && bubbleData!.length > 0; else spinnerOrError">
+  <div class="header‐with‐info">
+    <h1 class="header‐text">Recipe Popularity & Ratings</h1>
+    <button mat-icon-button class="info‐btn" matTooltip="This chart shows overall recipe popularity based on user ratings and servings."
+      matTooltipPosition="right" aria-label="What this chart represents">
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+
+  <ngx-charts-bubble-chart
+    *ngIf="bubbleData.length"
+    [results]="bubbleData"
+    [view]="[1400, 600]"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Average Rating'"
+    [yAxisLabel]="'Number of Ratings'"
+    [minRadius]="5"
+    [maxRadius]="20"
+    [showGridLines]="true"
+    [legend]="false"
+    [scheme]="primaryColorScheme"
+    [roundDomains]="true"
+    [yAxisTickFormatting]="formatYAxisTicks"
+    [yAxisTicks]="uniqueY"
+  >
+  </ngx-charts-bubble-chart>
+  <p class="chart-description">
+    Each bubble is a recipe:
+    its <strong>x-position</strong> is the average rating (1–5),
+    its <strong>y-position</strong> is how many users have rated it,
+    and its <strong>size</strong> reflects the number of servings.
+  </p>
+</ng-container>
+
+<ng-template #spinnerOrError>
+  <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="50"></mat-progress-spinner>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="!loading && !error && !bubbleData.length" class="no-data">
+    No recommendations to display.
+  </div>
+</ng-template>

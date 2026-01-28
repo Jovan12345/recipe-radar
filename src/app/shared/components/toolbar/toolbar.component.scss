@@ -1,0 +1,40 @@
+.toolbar {
+  color: #fff;
+  background: transparent;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  .logo-img {
+    height: 80px; /* adjust to your desired logo height */
+    width: auto;
+  }
+}
+
+.toolbar-icon {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  width: 60px; /* total button diameter */
+  height: 60px;
+  margin-left: 35px; /* spacing between icons */
+
+  /* 2) Center the icon inside the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  mat-icon {
+    font-size: 40px; /* adjust icon size */
+    width: 48px; /* total button diameter */
+    height: 48px; /* adjust for larger icon */
+    line-height: 48px; /* vertically center if needed */
+  }
+}

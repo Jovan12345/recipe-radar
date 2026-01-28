@@ -1,1 +1,56 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+// 1) Define an orange primary palette.
+//    We start from Angular Material’s built‐in orange palette.
+//    Default hue 500; lighter shade 300; darker shade 700.
+$my-primary-palette: mat.define-palette(mat.$orange-palette, 500, 300, 700);
+
+// 2) Define an accent palette (choose any complementary palette; here we pick deep orange or pink)
+$my-accent-palette: mat.define-palette(
+  mat.$deep-orange-palette,
+  A200,
+  A100,
+  A400
+);
+
+// 3) Define a warn palette (optional; defaults to red if you omit this)
+$my-warn-palette: mat.define-palette(mat.$red-palette);
+
+// 4) Create a “light” theme using these palettes:
+$my-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary-palette,
+      accent: $my-accent-palette,
+      warn: $my-warn-palette,
+    ),
+    typography: mat.define-typography-config(),
+    // keeps default typography
+    density: 0,
+    // default density
+  )
+);
+
+// 6) Include all component‐themed styles for your custom theme:
+@include mat.all-component-themes($my-app-theme);
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: mat.get-color-from-palette($my-primary-palette, 50);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1{
+  font-weight: 500 !important;
+  font-size: 40px !important;
+  margin-bottom: 20px !important;
+}

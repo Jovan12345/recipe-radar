@@ -1,0 +1,59 @@
+.table-container {
+  overflow-x: auto;
+}
+.full-width-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header-with-icon{
+  display: flex;
+  flex-direction: row;
+}
+
+td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+th{
+    color: var(--mdc-theme-primary);
+
+  font-size: 1.2rem;
+}
+
+.mat-column-actions {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mat-column-actions  button {
+  margin: 0 auto;
+}
+
+/* 2) Ensure expansion panel spans full width */
+mat-accordion {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* 3) Optionally adjust panel header padding/font */
+mat-expansion-panel-header {
+  padding: 0 16px;
+
+  span.mat-content {
+    overflow: visible !important;
+  }
+
+  mat-panel-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  mat-panel-description {
+    display: flex;
+    align-items: center;
+  }
+}

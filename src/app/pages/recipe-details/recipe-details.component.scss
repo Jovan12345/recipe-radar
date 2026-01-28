@@ -1,0 +1,45 @@
+/* src/app/recipe-details/recipe-details.component.scss */
+.details-card {
+  max-width: 800px;
+  margin: 140px auto 20px auto;
+  img {
+    height: 300px;
+    object-fit: cover;
+  }
+  mat-card-content p {
+    margin: 8px 0;
+  }
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  mat-icon { color: #fbc02d; margin-right: 4px; }
+  .count { margin-left: 8px; color: #666; }
+}
+
+.rating-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  mat-button-toggle-group {
+    display: flex;
+    mat-button-toggle {
+      display: flex;
+      align-items: center;
+      mat-icon { margin-right: 4px; }
+    }
+  }
+}
+
+.centered-spinner {
+  display: block;
+  margin: 100px auto;
+}
+.error {
+  color: #b00020;
+  text-align: center;
+  margin-top: 40px;
+}

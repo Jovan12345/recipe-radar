@@ -1,0 +1,20 @@
+.info‐btn {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 16px;
+  mat-icon {
+    font-size: 24px;
+  }
+}
+
+.chart-description {
+  margin: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
+:host ::ng-deep mat-progress-spinner.centered-spinner {
+  display: block;
+  margin: 60px auto;
+}

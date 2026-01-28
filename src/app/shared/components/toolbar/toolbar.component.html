@@ -1,0 +1,39 @@
+<mat-toolbar class="toolbar">
+  <a routerLink="/" class="nav-link">
+    <img
+      src="../../../assets/images/logo_22.png"
+      alt="App Logo"
+      class="logo-img"
+    />
+  </a>
+  <span class="spacer"></span>
+
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    routerLink="/add-recipe"
+    matTooltip="Add New Recipe"
+    aria-label="Add New Recipe"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    routerLink="/profile"
+    matTooltip="Profile"
+    aria-label="Profile"
+  >
+    <mat-icon>person</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    (click)="logout()"
+    matTooltip="Logout"
+    aria-label="Logout"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

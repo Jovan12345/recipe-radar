@@ -1,0 +1,110 @@
+<div class="hero">
+  <!-- center your speech UI -->
+  <div class="hero-content">
+    <div class="main-container">
+      <!-- Error Message -->
+      <mat-card
+        *ngIf="errorMessage$ | async as errorMessage"
+        class="notification error-card"
+      >
+        {{ errorMessage }}
+      </mat-card>
+
+      <div class="image-section">
+        <img src="../../../assets/images/logo_2.png" alt="" srcset="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2) Page Content Section -->
+<div class="page-content">
+  <!-- Recommendations -->
+  <section class="recommendations-section">
+    <app-recommended-recipe></app-recommended-recipe>
+  </section>
+
+  <div class="combined-section">
+    <div class="section-content">
+      <div class="search-container">
+        <!-- Input Section -->
+        <div class="input-section">
+          <!-- Microphone toggle -->
+          <div class="mic-section">
+            <button
+              mat-fab
+              color="accent"
+              *ngIf="listening$ | async; else startBtn"
+              (click)="stop()"
+            >
+              <mat-icon class="soundwave">mic</mat-icon>
+            </button>
+            <ng-template #startBtn>
+              <button mat-fab color="primary" (click)="start()">
+                <mat-icon>mic</mat-icon>
+              </button>
+            </ng-template>
+          </div>
+
+          <!-- Text input -->
+          <mat-form-field appearance="outline" class="full-width" matError="">
+            <mat-label
+              >Enter your request (ex. "Show all recipes with chicken" or "Add
+              sugar and milk to shopping list")</mat-label
+            >
+            <input
+              [formControl]="inputSearchValue"
+              (keyup.enter)="processInput()"
+              matInput
+            />
+
+            <!-- Checkmark as suffix -->
+            <button mat-icon-button matSuffix disabled *ngIf="showCheckIcon">
+              <mat-icon color="primary">check_circle</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <!-- Process Button -->
+          <div class="process-btn">
+            <button mat-raised-button color="primary" (click)="processInput()">
+              Process
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <section class="results-section" *ngIf="recipeResults?.length">
+        <recipe-results [recipes]="recipeResults"></recipe-results>
+      </section>
+    </div>
+  </div>
+
+  <!-- Shopping List -->
+  <section class="shopping-section">
+    <div class="section-content">
+      <div class="shopping-list-container">
+        <div class="header‐with‐info">
+          <h1>Your groceries</h1>
+        </div>
+        <shopping-list
+          [items]="shoppingItems"
+          (update)="onShoppingListUpdate($event)"
+          >
+        </shopping-list>
+      </div>
+    </div>
+  </section>
+
+  <section class="demographics-section">
+    <div class="demographics-bg">
+      <div class="demographics-container">
+        <app-rating-and-popularity></app-rating-and-popularity>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section>
+    <app-correlation></app-correlation>
+  </section> -->
+</div>

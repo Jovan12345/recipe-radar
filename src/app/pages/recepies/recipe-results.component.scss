@@ -1,0 +1,122 @@
+.recipe-content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.description {
+  font-style: italic;
+  color: #666;
+}
+
+
+/* Section titles */
+.section-title {
+  margin: 16px 0 8px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.grid-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* 2️⃣ Turn the grid-list into a one-row CSS grid */
+.horizontal-grid {
+  .recipe-card{
+    display: flex;
+    flex-direction: column;
+    height: 99%;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    width: 99%;
+    justify-self: center;
+
+    img[mat-card-image] {
+      width: 100%;
+      height: 160px; /* choose your image height */
+      object-fit: cover;
+      flex: 0 0 auto;
+      padding: 0 16px;
+    }
+    mat-card-header {
+      flex: 0 0 72px; /* reserve height for title/subtitle */
+      padding: 0 8px;
+    }
+    mat-card-content {
+      flex: 1 1 auto;
+      padding: 8px 16px;
+      overflow: hidden;
+      p {
+        margin: 0;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 14px;
+      color: #555;
+
+      mat-icon {
+        font-size: 16px;
+        color: #fbc02d;  /* gold star */
+        margin-right: 4px;
+      }
+
+      .count {
+        margin-left: 8px;
+        color: #888;
+      }
+    }
+  }
+}
+
+/* 3️⃣ Force each Angular tile to match the 350px rowHeight */
+mat-grid-tile {
+  height: 290px !important;       /* matches your rowHeight */
+  padding: 0 !important;
+}
+
+
+/* 10. Center spinner */
+.centered-spinner {
+  display: block;
+  margin: 50px auto;
+}
+
+::ng-deep .mat-grid-tile-content{
+  display: block !important;
+}
+
+/* 2) Ensure expansion panel spans full width */
+mat-accordion {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* 3) Optionally adjust panel header padding/font */
+mat-expansion-panel-header {
+  padding: 0 16px;
+
+  mat-panel-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  mat-panel-description {
+    display: flex;
+    align-items: center;
+  }
+}

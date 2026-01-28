@@ -1,27 +1,84 @@
-# RecipeRadar
+## 🔍 Features
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+- **Voice & Text Search**  
+  Speak or type natural-language requests (e.g. “Show me all chicken recipes”)  
+  → GPT → SQL → Supabase → Recipe results.
 
-## Development server
+- **Shopping List Management**  
+  Add or remove ingredients from your list via voice or text.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Recipe Recommendations**  
+  Personalized “Recommended for you” slider powered by:
+  1. **Demographic filtering** (city, age, gender)  
+  2. **Collaborative filtering** (user ratings)
 
-## Code scaffolding
+- **Recipe Details & Ratings**  
+  View recipe info, nutrition, instructions, and submit your own rating.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **User Profile**  
+  Enter your name, location, age & gender to unlock personalized recs.
 
-## Build
+- **Add New Recipes**  
+  Authorized users can add recipes via a form (category & difficulty dropdowns).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Data Visualization**  
+  Bubble chart of **Avg Rating vs. # of Ratings**, sized by servings.
 
-## Running unit tests
+- **Responsive, Modern UI**  
+  • Full-page hero with logo & toolbar  
+  • Carousel sliders (ngx-owl-carousel-o)  
+  • Angular Material components & Flex layout.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🚀 Quickstart
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Prerequisites
 
-## Further help
+- Node.js ≥ 18
+- npm or yarn
+- Angular CLI (`npm install -g @angular/cli`)
+- A Supabase project with tables: `profiles`, `recipes`, `ratings`, `shopping_list`
+- An OpenAI API key for GPT→SQL
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Environment
+
+Copy `src/environments/environment.ts` from the example and fill in:
+
+```ts
+export const environment = {
+  production: false,
+  supabaseUrl: 'https://your-supabase-url',
+  supabaseKey: 'your-supabase-key',
+  openaiKey: 'your-openai-key',
+};
+```
+Note: Never commit your real keys—use .gitignore for environment files.
+
+### Install & Serve
+```
+npm install
+ng serve
+```
+
+### 🏗️ Project Structure
+
+src/
+├── app/
+│   ├── pages/
+│   │   ├── web-speech/           # Voice/text → SQL search
+│   │   ├── recipe-results/       # Search results grid
+│   │   ├── recommended-recipes/  # Carousel of recs
+│   │   ├── recipe-details/       # Recipe detail & rating form
+│   │   ├── profile/              # User profile form
+│   │   ├── add-recipe/           # Admin: new recipe form
+│   │   └── charts/
+│   │       └── demographics/     # Bubble chart component
+│   ├── shared/
+│   │   ├── services/             # Supabase, ChatGPT, charts, speech
+│   │   └── material/             # Angular Material imports
+│   ├── app.component.*           # App shell & router-outlet
+│   └── app-routing.module.ts
+├── assets/                       # Images & textures
+├── environments/                 # dev/prod env configs
+└── styles.scss                   # Global theming & overrides

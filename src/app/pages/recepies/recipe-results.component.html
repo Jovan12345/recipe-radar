@@ -1,0 +1,33 @@
+<!-- recipe-results.component.html -->
+<ng-container *ngIf="recipes?.length">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Search results </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="grid-wrapper">
+        <mat-grid-list
+          cols="4"
+          rowHeight="300px"
+          gutterSize="16px"
+          class="horizontal-grid"
+        >
+          <mat-grid-tile *ngFor="let r of recipes">
+            <mat-card class="recipe-card" [routerLink]="['/recipes', r.id]">
+              <img mat-card-image [src]="r.image_url" [alt]="r.name" />
+              <mat-card-header>
+                <mat-card-title>{{ r.name }}</mat-card-title>
+                <mat-card-subtitle>
+                  {{ r.category }} • {{ r.difficulty }}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="description">{{ r.description }}</p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

@@ -1,0 +1,147 @@
+<div class="add-recipe-container" *ngIf="recipeForm; else loading">
+  <h2>Add New Recipe</h2>
+
+  <mat-card class="recipe-card">
+    <form [formGroup]="recipeForm" (ngSubmit)="submit()">
+      <!-- Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Recipe Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="e.g. Spaghetti Bolognese"
+        />
+        <mat-error *ngIf="recipeForm.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Category -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option *ngFor="let cat of categories" [value]="cat">
+            {{ cat }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="recipeForm.get('category')?.hasError('required')">
+          Category is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Difficulty -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Difficulty</mat-label>
+        <mat-select formControlName="difficulty">
+          <mat-option *ngFor="let d of difficulties" [value]="d">
+            {{ d | titlecase }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="recipeForm.get('difficulty')?.hasError('required')">
+          Difficulty is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Prep & Cook Times -->
+      <div class="row-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Prep Time (min)</mat-label>
+          <input matInput type="number" formControlName="prep_time" />
+          <mat-error *ngIf="recipeForm.get('prep_time')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cook Time (min)</mat-label>
+          <input matInput type="number" formControlName="cook_time" />
+          <mat-error *ngIf="recipeForm.get('cook_time')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Servings</mat-label>
+          <input matInput type="number" formControlName="servings" />
+          <mat-error *ngIf="recipeForm.get('servings')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Ingredients -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ingredients (comma separated)</mat-label>
+        <textarea matInput formControlName="ingredients" rows="3"></textarea>
+        <mat-error *ngIf="recipeForm.get('ingredients')?.hasError('required')">
+          Required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Instructions -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Instructions</mat-label>
+        <textarea matInput formControlName="instructions" rows="4"></textarea>
+        <mat-error *ngIf="recipeForm.get('instructions')?.hasError('required')">
+          Required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="2"></textarea>
+        <mat-error *ngIf="recipeForm.get('description')?.hasError('required')">
+          Required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Image URL -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="image_url" placeholder="https://..." />
+        <mat-error *ngIf="recipeForm.get('image_url')?.hasError('required')">
+          Required
+        </mat-error>
+        <mat-error *ngIf="recipeForm.get('image_url')?.hasError('pattern')">
+          Must be a valid URL (http:// or https://)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Calories & Protein (optional) -->
+      <div class="row-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Calories/Serving</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="calories_per_serving"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Protein/Serving (g)</mat-label>
+          <input matInput type="number" formControlName="protein_per_serving" />
+        </mat-form-field>
+      </div>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" [disabled]="isSubmitting">
+        {{ isSubmitting ? "Submitting…" : "Add Recipe" }}
+      </button>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <mat-progress-spinner
+    mode="indeterminate"
+    diameter="50"
+    class="centered-spinner"
+  ></mat-progress-spinner>
+</ng-template>

@@ -1,0 +1,225 @@
+/* 1) Outer wrapper: no more .section-image needed */
+.combined-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  background: url("../../../assets/images/bg3.png") center/cover no-repeat;
+  padding: 40px 0;
+}
+
+/* 2) Put the illustration behind .section-content */
+.section-content, .demographics-bg {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 24px;
+  padding: 32px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("../../../assets/images/bg1.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* optional dark overlay */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* ensure our content is above the overlay */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 16px;
+  }
+}
+
+/* 2. Re-use main-container styles but remove margin auto */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+
+  border-radius: 8px;
+}
+
+.image-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 60vh;
+    width: auto;
+  }
+}
+
+.search-container, .shopping-list-container, .demographics-container{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.full-width {
+  flex: 1 1 300px;
+  min-width: 200px;
+}
+
+.notification {
+  margin: 0;
+  padding: 16px;
+  font-size: 16px;
+}
+
+/* 5. Mic wave animation stays the same */
+.soundwave {
+  animation: soundwave 0.7s infinite;
+}
+
+@keyframes soundwave {
+  from {
+    opacity: 0.5;
+    color: #ffffff;
+  }
+  20% {
+    color: #ffffff;
+    opacity: 0.6;
+  }
+  35% {
+    color: #ffffff;
+    opacity: 0.9;
+  }
+  45% {
+    color: #ffffff;
+    opacity: 1;
+  }
+  55% {
+    color: #ffffff;
+    opacity: 0.9;
+  }
+  to {
+    color: #ffffff;
+    opacity: 0.5;
+  }
+}
+
+.page-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  .recommendations-section,
+  .shopping-section,
+  .demographics {
+    padding: 16px 32px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .demographics{
+    max-width: 1500px;
+    margin-bottom: 160px;
+  }
+
+
+  .shopping-section {
+    max-width: 964px;
+  }
+
+  .combined-section {
+    width: 100%;
+  }
+
+  .shopping-section {
+    mat-card {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding: 0 8px;
+}
+
+
+.demographics-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 160px;
+  padding-top: 20px;
+
+  position: relative;
+  width: 100%;
+  background: url("../../../assets/images/bg4.png") center/cover no-repeat;
+}
+
+.demographics-bg {
+  margin-top: 20px;
+  position: relative;
+  max-width: 1400px;
+}
+
+::ng-deep .header‐with‐info {
+  margin-top: 48px;
+  margin-bottom: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px; /* small gap between H2 and info button */
+  margin-bottom: 16px; /* spacing below the header */
+
+  justify-content: center;
+}

@@ -1,0 +1,56 @@
+<!-- src/app/recipe-details/recipe-details.component.html -->
+<ng-container *ngIf="!loading; else spinner" class="recipe-details-container">
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <mat-card *ngIf="recipe" class="details-card">
+    <img mat-card-image [src]="recipe.image_url" alt="{{ recipe.name }}" />
+    <mat-card-header>
+      <mat-card-title>{{ recipe.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ recipe.category }} • {{ recipe.difficulty }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <!-- Rating display -->
+    <div class="rating-display">
+      <mat-icon>star</mat-icon>
+      {{ avgRating | number:'1.1-1' }}
+      <span class="count">({{ ratingCount }} ratings)</span>
+    </div>
+
+    <!-- If user hasn't rated yet, show star selector -->
+    <div *ngIf="userRating===null" class="rating-input">
+      <p>Rate this recipe:</p>
+      <mat-button-toggle-group
+        name="stars"
+        [(ngModel)]="newRating"
+        aria-label="Star rating">
+        <mat-button-toggle *ngFor="let s of [1,2,3,4,5]" [value]="s">
+          <mat-icon>star_border</mat-icon>
+          {{ s }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <button mat-raised-button color="primary" (click)="submitRating()" [disabled]="newRating<1">
+        Submit rating
+      </button>
+    </div>
+    <mat-card-content>
+      <p><strong>Description:</strong> {{ recipe.description }}</p>
+      <p><strong>Ingerients:</strong> {{ recipe.ingredients }}</p>
+      <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+      <p>
+        <strong>Prep time:</strong> {{ recipe.prep_time }} min •
+        <strong>Cook time:</strong> {{ recipe.cook_time }} min •
+        <strong>Servings:</strong> {{ recipe.servings }}
+      </p>
+      <p *ngIf="recipe.calories_per_serving !== null">
+        <strong>Calories/serving:</strong> {{ recipe.calories_per_serving }}
+      </p>
+      <p *ngIf="recipe.protein_per_serving !== null">
+        <strong>Protein/serving:</strong> {{ recipe.protein_per_serving }}g
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #spinner>
+  <mat-progress-spinner mode="indeterminate" diameter="50" class="centered-spinner"></mat-progress-spinner>
+</ng-template>
