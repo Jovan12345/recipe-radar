@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { environment } from '../../../../environments/environment';
 
 interface PopularityPoint {
   name: string;         // recipe name
@@ -18,8 +19,8 @@ interface CorrelationEntry {
 
 @Injectable({ providedIn: 'root' })
 export class ChartDataService {
-  private GPT_API_URL = 'http://localhost:8000/data/recipe-rating';
-  private GPT_CORRELATION_API_URL = 'http://localhost:8000/data/correlation';
+  private GPT_API_URL = `${environment.apiUrl}/data/recipe-rating`;
+  private GPT_CORRELATION_API_URL = `${environment.apiUrl}/data/correlation`;
 
   constructor(
     private http: HttpClient

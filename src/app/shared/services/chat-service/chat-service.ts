@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from '../../../../environments/environment';
 
 export interface GPTResponse {
   action: 'fetch_recipes' | 'add_items' | 'delete_items';
@@ -14,7 +15,7 @@ export interface GPTResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  private GPT_API_URL = 'http://localhost:8000/generate-sql';
+  private GPT_API_URL = `${environment.apiUrl}/generate-sql`;
 
   constructor(private http: HttpClient) {}
 

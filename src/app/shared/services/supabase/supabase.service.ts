@@ -9,7 +9,7 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 export interface Profile {
   id?: string;
@@ -330,7 +330,7 @@ export class SupabaseService {
 
   async getProfileRatings(profileId: number): Promise<any[]> {
     try {
-      const response = await fetch(`http://localhost:8000/profile/${profileId}/ratings`);
+      const response = await fetch(`${environment.apiUrl}/profile/${profileId}/ratings`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
