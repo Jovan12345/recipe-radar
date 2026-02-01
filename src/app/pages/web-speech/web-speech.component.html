@@ -66,8 +66,10 @@
 
           <!-- Process Button -->
           <div class="process-btn">
-            <button mat-raised-button color="primary" (click)="processInput()">
-              Process
+            <button mat-raised-button color="primary" (click)="processInput()" [disabled]="isProcessing">
+              <mat-spinner *ngIf="isProcessing" diameter="20" class="button-spinner"></mat-spinner>
+              <span *ngIf="!isProcessing">Process</span>
+              <span *ngIf="isProcessing">Processing...</span>
             </button>
           </div>
         </div>
@@ -85,7 +87,7 @@
     <div class="section-content">
       <div class="shopping-list-container">
         <div class="header‐with‐info">
-          <h1>Your groceries</h1>
+          <h1>Your products</h1>
         </div>
         <shopping-list
           [items]="shoppingItems"

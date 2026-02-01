@@ -27,6 +27,7 @@ export class WebSpeechComponent implements OnInit {
   shoppingItems: { id: number, ingredient_name: string; quantity: number; unit: string }[] =
     [];
   recipeResults: any[] = [];
+  isProcessing = false;
 
   inputSearchValue = new FormControl('');
 
@@ -140,38 +141,46 @@ export class WebSpeechComponent implements OnInit {
 
   processInput(): void {
     const userInput = this.inputSearchValue.value || this.totalTranscript;
-    if (!userInput) return;
+    if (!userInput || this.isProcessing) return;
 
-    this.chatService.sendToGPT(userInput).subscribe(async (response) => {
-      const { action, sql, params } = response;
+    this.isProcessing = true;
+    this.chatService.sendToGPT(userInput).subscribe({
+      next: async (response) => {
+        const { action, sql, params } = response;
 
-      if (action === 'fetch_recipes' && sql) {
-        const cleanedSQL = sql
-          .replace(/```sql|```/gi, '')
-          .replace(/;$/, '')
-          .replace(/\n/g, ' ')
-          .trim();
+        if (action === 'fetch_recipes' && sql) {
+          const cleanedSQL = sql
+            .replace(/```sql|```/gi, '')
+            .replace(/;$/, '')
+            .replace(/\n/g, ' ')
+            .trim();
 
-        try {
-          const rows = await this.supabaseService.executeSQL(cleanedSQL);
-          this.recipeResults = rows;
-        } catch (err) {
-          console.error('SQL execution error:', err);
+          try {
+            const rows = await this.supabaseService.executeSQL(cleanedSQL);
+            this.recipeResults = rows;
+          } catch (err) {
+            console.error('SQL execution error:', err);
+          }
+        } else if (action === 'add_items' && Array.isArray(params)) {
+          for (const item of params) {
+            await this.supabaseService.addToShoppingList(item);
+          }
+          this.loadShoppingList();
+          console.log('Items added to shopping list!');
+        } else if (action === 'delete_items' && Array.isArray(params)) {
+          for (const item of params) {
+            await this.supabaseService.deleteItemByIngredient(item.ingredient_name);
+          }
+          await this.loadShoppingList();
+          console.log('Items deleted from shopping list!');
+        } else {
+          console.warn('Unrecognized or incomplete GPT response:', response);
         }
-      } else if (action === 'add_items' && Array.isArray(params)) {
-        for (const item of params) {
-          await this.supabaseService.addToShoppingList(item);
-        }
-        this.loadShoppingList();
-        console.log('Items added to shopping list!');
-      } else if (action === 'delete_items' && Array.isArray(params)) {
-        for (const item of params) {
-          await this.supabaseService.deleteItemByIngredient(item.ingredient_name);
-        }
-        await this.loadShoppingList();
-        console.log('Items deleted from shopping list!');
-      } else {
-        console.warn('Unrecognized or incomplete GPT response:', response);
+        this.isProcessing = false;
+      },
+      error: (err) => {
+        console.error('Error processing input:', err);
+        this.isProcessing = false;
       }
     });
   }

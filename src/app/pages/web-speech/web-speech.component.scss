@@ -114,6 +114,22 @@
   min-width: 200px;
 }
 
+.process-btn {
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .button-spinner {
+    display: inline-block;
+
+    ::ng-deep circle {
+      stroke: white;
+    }
+  }
+}
+
 .notification {
   margin: 0;
   padding: 16px;
