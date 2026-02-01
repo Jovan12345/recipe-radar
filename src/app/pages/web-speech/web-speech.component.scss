@@ -119,13 +119,24 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
   }
 
-  .button-spinner {
-    display: inline-block;
+  .button-spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 
     ::ng-deep circle {
       stroke: white;
+    }
+  }
+
+  button:disabled {
+    span {
+      opacity: 0.7;
     }
   }
 }

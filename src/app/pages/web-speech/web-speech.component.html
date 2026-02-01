@@ -67,9 +67,8 @@
           <!-- Process Button -->
           <div class="process-btn">
             <button mat-raised-button color="primary" (click)="processInput()" [disabled]="isProcessing">
-              <mat-spinner *ngIf="isProcessing" diameter="20" class="button-spinner"></mat-spinner>
-              <span *ngIf="!isProcessing">Process</span>
-              <span *ngIf="isProcessing">Processing...</span>
+              <span>Process</span>
+              <mat-spinner *ngIf="isProcessing" diameter="20" class="button-spinner-overlay"></mat-spinner>
             </button>
           </div>
         </div>
